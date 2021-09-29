@@ -166,6 +166,47 @@ ON inf.idlivro = lo.idlivro
 ORDER BY Subtotal DESC
 LIMIT 3;
 
+/*Aula dia 22/09
+*
+*
+*Banco de dados usado: Loja
+*
+*
+*/
+
+SELECT * FROM Produtos WHERE PrecoUnitario BETWEEN 9 and 15;
+
+SELECT * FROM Clientes WHERE NomeCliente BETWEEN 'A' and 'C';
+
+SELECT * FROM Produtos LIMIT 2;
+
+SELECT MIN(PrecoUnitario) FROM Produtos;
+
+SELECT MAX(PrecoUnitario) AS 'Maior Valor' FROM Produtos;
+
+SELECT COUNT(IDProduto) FROM Produtos;
+
+SELECT AVG(PrecoUnitario) FROM Produtos;
+
+SELECT SUM(PrecoUnitario) FROM Produtos;
+
+SELECT IDVenda, iv.IDProduto, QtdeVendida,
+QtdeVendida * PrecoUnitario AS Subtotal
+FROM ItensVendidos  AS iv
+INNER JOIN Produtos
+ON iv.IDProduto = Produtos.IDProduto
+ORDER BY IDVenda;
+
+SELECT iv.IDVenda AS Venda,
+p.NomeProduto AS Nome,
+iv.QtdeVendida AS Qtde,
+p.PrecoUnitario AS Preco,
+QtdeVendida * PrecoUnitario AS Subtotal
+FROM ItensVendidos AS iv
+INNER JOIN Produtos AS p
+ON iv.IDProduto = p.IDProduto
+ORDER BY iv.IDVenda;
+
 /*Aula dia 29/09 
 *
 *
@@ -319,3 +360,84 @@ VALUES('404','208','5');
 
 INSERT INTO itensvendidos
 VALUES('404','209','10');
+
+1)
+SELECT * FROM veiculos 
+WHERE preco 
+BETWEEN 10000 AND 15000;
+
+2)
+SELECT * FROM clientes WHERE nomecliente 
+BETWEEN 'F' and 'S';
+
+3)
+SELECT * FROM veiculos LIMIT 2;
+
+4)
+SELECT MIN(preco) FROM veiculos;
+
+5)
+SELECT MAX(preco) FROM veiculos;
+
+6)
+SELECT MAX(preco) AS 'Maior Valor' FROM veiculos;
+
+7)
+SELECT COUNT(idveiculo) FROM veiculos;
+
+8)
+SELECT AVG(preco) FROM veiculos; ******
+
+9)
+SELECT SUM(preco) FROM veiculos;
+
+10)
+SELECT iv.idvenda, 
+iv.idveiculo, 
+iv.qtdevendida,
+qtdevendida * preco AS Subtotal
+FROM itensvendidos AS iv
+INNER JOIN veiculos AS v
+ON iv.idveiculo = v.idveiculo
+ORDER BY idvenda;
+
+11)
+SELECT iv.idvenda AS Venda,
+vc.modelo AS Carro,
+iv.qtdevendida AS Qtde,
+vc.preco AS Preco,
+qtdevendida * preco AS Subtotal
+FROM itensvendidos AS iv
+INNER JOIN veiculos AS VC
+ON iv.idveiculo = vc.idveiculo
+ORDER BY iv.idvenda;
+
+12)
+SELECT vd.idvenda AS Venda,
+vd.datavenda AS 'Data',
+cli.nomecliente AS Nome,
+cli.estado AS UF
+FROM clientes AS cli
+INNER JOIN vendas AS vd
+ON cli.idcliente = vd.idcliente
+ORDER BY vd.idvenda;
+
+13)
+SELECT iv.idvenda AS Venda,
+vc.modelo AS Carro,
+qtdevendida * preco AS Subtotal
+FROM itensvendidos AS iv 
+INNER JOIN veiculos AS vc
+ON iv.idveiculo = vc.idveiculo
+ORDER BY idvenda
+LIMIT 5;
+
+14)
+SELECT iv.idvenda AS Venda,
+vc.modelo AS Carro,
+qtdevendida * preco AS Subtotal
+FROM itensvendidos AS iv 
+INNER JOIN veiculos AS vc
+ON iv.idveiculo = vc.idveiculo
+ORDER BY Subtotal DESC
+LIMIT 3;
